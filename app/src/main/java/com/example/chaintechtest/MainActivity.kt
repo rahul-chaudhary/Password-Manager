@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph
 import androidx.navigation.compose.NavHost
@@ -31,7 +32,7 @@ class MainActivity : ComponentActivity() {
                     startDestination = HOME_PAGE) {
 
                     composable(HOME_PAGE) {
-                        HomePage()
+                        HomePage(LocalContext.current)
                     }
                 }
 
