@@ -16,8 +16,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.chaintechtest.ui.theme.blueMedium
 import com.example.chaintechtest.ui.theme.whiteDark
 
@@ -41,11 +43,27 @@ fun HomePage() {
             horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
-            Box(modifier = Modifier
-                .fillMaxWidth(1f)
-                .height(60.dp))
-            Text("Password Manager")
+            AppBarBox()
+
         }
+    }
+}
+
+@Composable
+private fun AppBarBox() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(horizontal = 15.dp, vertical = 30.dp)
+            .height(80.dp)
+
+    ) {
+        Text(
+            "Password Manager",
+            fontSize = 24.sp,
+            textAlign = TextAlign.Start
+        )
+
     }
 }
 
