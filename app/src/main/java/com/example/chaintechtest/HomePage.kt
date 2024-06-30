@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.sp
 import com.example.chaintechtest.ui.theme.clrBlack
 import com.example.chaintechtest.ui.theme.clrBlueMedium
 import com.example.chaintechtest.ui.theme.clrGrey
+import com.example.chaintechtest.ui.theme.clrRed
 import com.example.chaintechtest.ui.theme.clrWhiteDark
 import com.example.chaintechtest.ui.theme.clrWhiteFaded
 import com.example.chaintechtest.ui.theme.clrWhiteNormal
@@ -93,7 +94,7 @@ fun HomePage(context: Context) {
 
             LazyColumn() {
                 items(cardTitleList) {
-                    PasswordItemCard(it, context)
+                    PasswordItemCard(it, context, showBottomSheet, bottomSheetAction)
                 }
 
             }
@@ -103,7 +104,7 @@ fun HomePage(context: Context) {
 }
 
 @Composable
-private fun PasswordItemCard(cardTitle: String, context: Context) {
+private fun PasswordItemCard(cardTitle: String, context: Context, showBottomSheet: MutableState<Boolean>, action: MutableState<BottomSheetAction>) {
     Box(
         modifier = Modifier
             .padding(horizontal = 10.dp, vertical = 15.dp)
@@ -114,6 +115,8 @@ private fun PasswordItemCard(cardTitle: String, context: Context) {
                 shape = RoundedCornerShape(0.5.dp)
             )
             .clickable {
+                showBottomSheet.value = true
+                action.value = BottomSheetAction.CARD_CLICK_ACTION
                 Toast
                     .makeText(
                         context,
@@ -221,10 +224,59 @@ private fun PasswordManagerBottomSheet(
                     AddAccountDetails()
                 }
 
-                BottomSheetAction.CARD_CLICK_ACTION -> {}
+                BottomSheetAction.CARD_CLICK_ACTION -> {
+                    EditAccountDetails()
+                }
                 BottomSheetAction.NO_ACTION -> {}
             }
         }
+    }
+}
+
+@Composable
+fun EditAccountDetails() {
+    Column(horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+            .fillMaxWidth(1f)
+            .padding(horizontal = 15.dp, vertical = 0.dp)
+        ) {
+        Text(
+            "Account Details", fontSize = 25.sp, color = clrBlueMedium, modifier = Modifier.padding(vertical = 30.dp))
+        Text(text = "Account type", fontSize = 10.sp, color = clrGrey)
+        Text(text = "Facebook", fontSize = 20.sp, color = clrBlack, modifier = Modifier.padding(bottom = 20.dp))
+        Text(text = "Username/Email", fontSize = 10.sp, color = clrGrey)
+        Text(text = "random@email.com", fontSize = 20.sp, color = clrBlack, modifier = Modifier.padding(bottom = 20.dp))
+        Text(text = "Password", fontSize = 10.sp, color = clrGrey)
+        Text(text = "********", fontSize = 20.sp, color = clrBlack, modifier = Modifier.padding(bottom = 20.dp))
+        Row(horizontalArrangement = Arrangement.SpaceAround,
+            modifier = Modifier
+                .fillMaxWidth(1f)) {
+            ElevatedButton(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.elevatedButtonColors(
+                    containerColor = clrBlack
+                ),
+                modifier = Modifier
+                    .padding(horizontal = 5.dp)
+                    .weight(0.5f)) {
+                Text(text ="Edit", color = clrWhiteNormal)
+            }
+            ElevatedButton(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.elevatedButtonColors(
+                    containerColor = clrRed
+                ),
+                modifier = Modifier
+                    .padding(5.dp)
+                    .weight(0.5f)
+            ) {
+                Text(text ="Delete", color = clrWhiteNormal)
+            }
+
+        }
+
+
     }
 }
 

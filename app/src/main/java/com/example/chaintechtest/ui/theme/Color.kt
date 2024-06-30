@@ -16,4 +16,5 @@ val clrBlueMedium = Color(0xff3f7de2)
 val clrWhiteNormal = Color(0xffffffff)
 val clrGrey = Color(0xff8e8e93)
 val clrBlack = Color(0xff000000)
+val clrRed = Color(0xFFDD0000)
 
